@@ -1,0 +1,5 @@
+source "/root/esp32_emu_workspace/esp-idf/components/bootloader/Kconfig.projbuild"
+source "/root/esp32_emu_workspace/esp-idf/components/esp_app_format/Kconfig.projbuild"
+source "/root/esp32_emu_workspace/esp-idf/components/esp_rom/Kconfig.projbuild"
+source "/root/esp32_emu_workspace/esp-idf/components/esptool_py/Kconfig.projbuild"
+source "/root/esp32_emu_workspace/esp-idf/components/partition_table/Kconfig.projbuild"
