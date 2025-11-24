@@ -48,6 +48,7 @@ CFLAGS="-Wno-deprecated-declarations" ../configure \
 
 make -j$(nproc)
 sudo make install
+```
                                   ##3. Challenges & Solutions
 
 ### Challenge 1: QEMU Crypto Modules
@@ -73,6 +74,7 @@ sudo make install
 **Description:** Emulates toggling a GPIO pin while printing 'LED ON' and 'LED OFF' messages to the console.
 
 **code:**
+```
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -97,13 +99,14 @@ void app_main(void) {
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
-
+```
  Successfully built and ran in QEMU
 
 ### Program 2: Simulated Temperature Sensor
 
 **Description:** Simulates a temperature sensor by printing periodic randomized readings to the console.
 **Code:**
+```
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -117,12 +120,12 @@ void app_main(void) {
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
 }
-
+```
 ##BUILD AND EXECUTION PROCESS-
 
 # Build the project
+```
 idf.py build
-
 # Create flash image with proper structure
 esptool.py --chip esp32 merge_bin -o build/flash_image.bin \
   --flash_mode dio --flash_freq 40m --flash_size 4MB \
@@ -133,7 +136,7 @@ esptool.py --chip esp32 merge_bin -o build/flash_image.bin \
 # Execute in QEMU
 qemu-system-xtensa -nographic -machine esp32 \
   -serial mon:stdio -drive file=build/flash_image.bin,if=mtd,format=raw
-
+```
                                         ## 5. Reflection: Integration with Yaksh
 
 This ESP32 emulation setup allows Yaksh to:
