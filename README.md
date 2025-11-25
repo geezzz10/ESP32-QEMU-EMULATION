@@ -1,21 +1,35 @@
 # ESP32 QEMU Emulation Project
 
-A complete ESP32 emulation environment using QEMU.
+A complete ESP32 emulation environment using QEMU, developed for the FOSSEE Winter Internship screening task. This project demonstrates full ESP32 virtualization without physical hardware and lays the foundation for automated code evaluation systems.
 
 ## Project Overview
 - **LED Blink Demo**: GPIO toggling with console status messages
 - **Temperature Sensor Demo**: Simulated temperature readings 
 - **Full QEMU Setup**: Custom compiled ESP32 emulator
+- 
+## 📋 Project Demos
+### 1. LED Blink Program
+- Emulates GPIO pin toggling using ESP32's GPIO subsystem
+- Prints "LED ON" / "LED OFF" status messages to console with 1-second intervals
+- Demonstrates basic embedded systems programming and hardware simulation
 
-## Start- 
-# Build and run temperature sensor
-cd my_temperature
-idf.py build
-idf.py qemu
+### 2. Temperature Sensor Program  
+- Simulates temperature readings between 20.0°C and 30.0°C with 0.1°C increments
+- Prints periodic temperature updates every 2 seconds using FreeRTOS task delays
+- Shows sensor data processing, console I/O, and real-time system capabilities
 
-##project structure
+## Technical Implementation
 
-| Directory/File | Description |
+- **QEMU Version**: Espressif fork (custom compiled with ESP32 support)
+- **ESP-IDF Version**: v5.1.2
+- **Target Architecture**: Xtensa ESP32
+- **Build System**: ESP-IDF + CMake + Ninja
+- **Development Platform**: Ubuntu 22.04 (WSL2)
+- **Emulation Method**: Full-system virtualization with SPI flash simulatio
+
+  ## Project Structure 
+
+| Directory   | Description |
 |---------------|-------------|
 | `report.md` | Complete project documentation & technical report |
 | `README.md` | Project overview and setup guide |
@@ -54,8 +68,8 @@ esptool.py --chip esp32 merge_bin -o build/flash_image.bin \
 # Execute in QEMU emulator
 qemu-system-xtensa -nographic -machine esp32 \
   -serial mon:stdio -drive file=build/flash_image.bin,if=mtd,format=raw
-
-Technical Challenges & Solutions
+```
+# Technical Challenges & Solutions -
 
 Challenge 1: QEMU ESP32 Cryptographic Module Compilation
 
@@ -63,7 +77,7 @@ Problem: Initial QEMU compilation failed with unknown type 'misc.esp32.rsa' erro
 
 Solution:
 
-· Researched Espressif's build configuration and discovered libgcrypt20-dev dependency
+· Researched Espressif's build configuration and discovered `libgcrypt20-dev` dependency
 · Used --enable-gcrypt flag during QEMU configuration
 · Verified crypto module compilation in meson.build files
 
@@ -96,7 +110,7 @@ Solution:
 · Used conservative compilation parameters
 · Verified architecture-specific dependencies
 
-📊 Results
+## Results
 
 Both demos successfully execute in the QEMU emulator with:
 
@@ -105,8 +119,27 @@ Both demos successfully execute in the QEMU emulator with:
 · Boot Process: Complete ESP32 boot sequence with partition table loading
 · System Stability: Continuous operation without crashes or memory issues
 
-Evidence & Documentation
-
+# Demonstration
 · Screenshots Available: screenshot_blink.png and screenshot_temp.png show both programs running successfully
 · Complete Project Archive: esp32_qemu_project.zip contains all source code, documentation, and build files
 · Live Demonstration: Project can be reproduced using the provided setup instructions
+
+Yaksh Integration
+This ESP32 QEMU emulation setup provides the complete technical foundation for integrating embedded systems evaluation into the Yaksh platform:
+
+Hardware-Free Assessment: No physical ESP32 devices required
+
+Safe Execution: QEMU provides complete isolation from host system
+
+Scalable Evaluation: Multiple QEMU instances run concurrently
+
+Cost-Effective: Eliminates hardware procurement and maintenance
+
+Real ESP32 Environment: Students learn actual ESP-IDF development
+
+Complete setup instructions, detailed challenge analysis, and implementation methodology available in report.md.
+
+# Now I'm gonna watch big bang theory , but y'all enjoy setting up this environment , BYEEE!
+
+Submitted for: FOSSEE Winter Internship
+
